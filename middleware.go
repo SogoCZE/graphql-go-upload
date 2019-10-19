@@ -10,6 +10,7 @@ import (
 	"net/http"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 	"sync"
 
@@ -64,6 +65,8 @@ func Handler(next http.Handler) http.Handler {
 			next.ServeHTTP(w, r)
 			return
 		}
+
+		mapEntries := map[string][]string{}
 
 		l.Lock()
 		defer l.Unlock()
@@ -162,6 +165,13 @@ func findFields(operations interface{}, entryPaths []string) map[string]interfac
 			return findFields(operations, entryPaths)
 		} else if op, ok := operations.(map[string]interface{}); ok {
 			operations = op[entryPaths[i]]
+		} else if opAr, ok := operations.([]interface{}); ok {
+			opArIndex, err := strconv.Atoi(entryPaths[i])
+			fmt.Println(opAr, opArIndex, entryPaths[i])
+			if err == nil {
+				operations = opAr[opArIndex]
+				fmt.Println("ARAY", operations)
+			}
 		}
 	}
 
