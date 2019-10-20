@@ -167,10 +167,8 @@ func findFields(operations interface{}, entryPaths []string) map[string]interfac
 			operations = op[entryPaths[i]]
 		} else if opAr, ok := operations.([]interface{}); ok {
 			opArIndex, err := strconv.Atoi(entryPaths[i])
-			fmt.Println(opAr, opArIndex, entryPaths[i])
 			if err == nil {
 				operations = opAr[opArIndex]
-				fmt.Println("ARAY", operations)
 			}
 		}
 	}
