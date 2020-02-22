@@ -1,4 +1,4 @@
-module github.com/eko/graphql-go-upload
+module github.com/SogoCZE/graphql-go-upload
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
